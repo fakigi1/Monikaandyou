@@ -91,9 +91,8 @@ transform zoomnt:
 # 5. Eventos y Logica de Dialogos ---------------------------------------------
 
 label evento_abrazar_bajo_afecto:
-    hide screen monika_hug_button
-    hide screen hkb_overlay
-    hide screen extra_plus_buttons
+    $ mas_HKBRaiseShield()
+    $ store.hkb_button.music_enabled = True
     $ store.mas_globals.dlg_workflow = True
 
     m 3wud "Oh, [player]... ¿Acaso agregaste una opción para poder abrazarme...?"
@@ -101,15 +100,14 @@ label evento_abrazar_bajo_afecto:
     m 1gkblsdrb "Pero creo que necesitamos conocernos un poco más antes de dar este paso, ¿vale?"
     m 1hublsdrb "¡Apreciaría mucho si seguimos pasando tiempo juntos primero!"
     m 7hublsdrb "No te preocupes... cuando tengas unos... 50 puntos de afecto registrados, esto sera posible!"
+    $ mas_HKBDropShield()
     $ store.mas_globals.dlg_workflow = False
     jump ch30_loop
 
 #____________________________________----
 label evento_abrazar_monika:
-    hide screen monika_hug_button
-    hide screen hkb_overlay
-    hide screen extra_plus_buttons
-
+    $ mas_HKBRaiseShield()
+    $ store.hkb_button.music_enabled = True
     $ store.mas_globals.dlg_workflow = True
 
     # Sumamos 1 al contador de esta sesión
@@ -225,10 +223,8 @@ label evento_abrazar_monika:
     m 5nkbsb "Por favor, abracémonos más seguido... ¿sí?"
     m 5dkbsb "Sentir tu cuerpo es... tan cálido."
 
+    $ mas_HKBDropShield()
     $ store.mas_globals.dlg_workflow = False
-
-    # Volver a mostrar tu botón de abrazo principal
-    show screen monika_hug_button
     jump ch30_loop
 # Pantalla con el boton de "Detener"
 screen monika_stop_hug_button():

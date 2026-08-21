@@ -91,16 +91,23 @@ transform zoomnt:
 # 5. Events and Dialogue Logic ---------------------------------------------
 
 label evento_abrazar_bajo_afecto:
+    $ mas_HKBRaiseShield()
+    $ store.hkb_button.music_enabled = True
+    $ store.mas_globals.dlg_workflow = True
     m 3wud "Oh, [player]... Did you really add an option to hug me...?"
     m 2ekblb "Wow... that's so sweet of you."
     m 1gkblsdrb "But I think we need to get to know each other a little more before taking this step, okay?"
     m 1hublsdrb "I'd really appreciate it if we keep spending time together first!"
     m 7hublsdrb "Don't worry... when you reach around... 50 affection points, this will be possible!"
+    $ mas_HKBDropShield()
+    $ store.mas_globals.dlg_workflow = False
     jump ch30_loop
 
 
 label evento_abrazar_monika:
-    hide screen monika_hug_button
+    $ mas_HKBRaiseShield()
+    $ store.hkb_button.music_enabled = True
+    $ store.mas_globals.dlg_workflow = True
 
     # Add 1 to this session's counter
     $ persistent._mas_hug_count += 1
@@ -215,7 +222,8 @@ label evento_abrazar_monika:
     m 5nkbsb "Please, let's hug more often... okay?"
     m 5dkbsb "Feeling your body is... so warm."
 
-    show screen monika_hug_button
+    $ mas_HKBDropShield()
+    $ store.mas_globals.dlg_workflow = False
     jump ch30_loop
 
 # Screen with the "Stop" button
